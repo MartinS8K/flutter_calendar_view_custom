@@ -215,6 +215,9 @@ class DayView<T extends Object?> extends StatefulWidget {
   /// Emulate vertical line offset from hour line starts.
   final double emulateVerticalOffsetBy;
 
+  /// Controller for the DayView.
+  final PageController? pageController;
+
   /// Main widget for day view.
   const DayView({
     Key? key,
@@ -261,6 +264,7 @@ class DayView<T extends Object?> extends StatefulWidget {
     this.startDuration = const Duration(hours: 0),
     this.onHeaderTitleTap,
     this.emulateVerticalOffsetBy = 0,
+    this.pageController,
   })  : assert(!(onHeaderTitleTap != null && dayTitleBuilder != null),
             "can't use [onHeaderTitleTap] & [dayTitleBuilder] simultaneously"),
         assert(timeLineOffset >= 0,
@@ -342,7 +346,7 @@ class DayViewState<T extends Object?> extends State<DayView<T>> {
     _scrollController = ScrollController(
         initialScrollOffset: widget.scrollOffset ??
             widget.startDuration.inMinutes * widget.heightPerMinute);
-    _pageController = PageController(initialPage: _currentIndex);
+    _pageController = widget.pageController ?? PageController(initialPage: _currentIndex);
     _eventArranger = widget.eventArranger ?? SideEventArranger<T>();
     _assignBuilders();
   }
