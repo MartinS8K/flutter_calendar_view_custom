@@ -218,6 +218,9 @@ class DayView<T extends Object?> extends StatefulWidget {
   /// Controller for the DayView.
   final PageController? pageController;
 
+  /// Show timeline or not.
+  final bool showTimeLine;
+
   /// Main widget for day view.
   const DayView({
     Key? key,
@@ -265,6 +268,7 @@ class DayView<T extends Object?> extends StatefulWidget {
     this.onHeaderTitleTap,
     this.emulateVerticalOffsetBy = 0,
     this.pageController,
+    this.showTimeLine = true,
   })  : assert(!(onHeaderTitleTap != null && dayTitleBuilder != null),
             "can't use [onHeaderTitleTap] & [dayTitleBuilder] simultaneously"),
         assert(timeLineOffset >= 0,
@@ -477,6 +481,7 @@ class DayViewState<T extends Object?> extends State<DayView<T>> {
                                 _quarterHourIndicatorSettings,
                             emulateVerticalOffsetBy:
                                 widget.emulateVerticalOffsetBy,
+                            showTimeLine: widget.showTimeLine,
                           ),
                         );
                       },
